@@ -35,7 +35,7 @@ startTime = None
 
 # How many seconds to detect the same emotion
 # before playing the video
-emotionThreshold = 3
+emotionThreshold = 1
 
 # This will be turned true if a thumb is detected, and
 # after an emotion video has played, it will go back to false
@@ -74,6 +74,8 @@ def play_happy_video():
         happyTracker = 0
 
     happy = cv2.VideoCapture(HAPPY_VIDEOS[happyTracker])
+    cv2.namedWindow("Happy video", cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty("Happy video", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     if not happy.isOpened():
         print("Error opening happy video.")
@@ -83,9 +85,9 @@ def play_happy_video():
         _, happyFrame = happy.read()
         if not _:
             break
-        cv2.putText(mainFrame, "happy, content", (50, 50), cv2.FONT_HERSHEY_SIMPLEX,
-                        1, (0, 255, 0), 2, cv2.LINE_AA)
-        
+
+        cv2.putText(happyFrame, "happy, content", (100, 100), cv2.FONT_HERSHEY_SIMPLEX,
+                        2, (0, 255, 0), 3, cv2.LINE_AA)
         cv2.imshow("Happy video", happyFrame)
         if cv2.waitKey(25) & 0xFF == ord('q'):
             break
@@ -103,6 +105,8 @@ def play_angry_video():
         angryTracker = 0
 
     angry = cv2.VideoCapture(ANGRY_VIDEOS[angryTracker])
+    cv2.namedWindow("Angry video", cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty("Angry video", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     if not angry.isOpened():
         print("Error opening angry video.")
@@ -112,6 +116,9 @@ def play_angry_video():
         _, angryFrame = angry.read()
         if not _:
             break
+
+        cv2.putText(angryFrame, "angry, irritated", (100, 100), cv2.FONT_HERSHEY_SIMPLEX,
+                        2, (0, 255, 0), 3, cv2.LINE_AA)
         cv2.imshow("Angry video", angryFrame)
         if cv2.waitKey(25) & 0xFF == ord('q'):
             break
@@ -129,6 +136,8 @@ def play_sad_video():
         sadTracker = 0
 
     sad = cv2.VideoCapture(SAD_VIDEOS[sadTracker])
+    cv2.namedWindow("Sad video", cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty("Sad video", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     if not sad.isOpened():
         print("Error opening sad video.")
@@ -138,6 +147,9 @@ def play_sad_video():
         _, sadFrame = sad.read()
         if not _:
             break
+
+        cv2.putText(sadFrame, "sad, worried, anxious", (100, 100), cv2.FONT_HERSHEY_SIMPLEX,
+                        2, (0, 255, 0), 3, cv2.LINE_AA)
         cv2.imshow("Sad video", sadFrame)
         if cv2.waitKey(25) & 0xFF == ord('q'):
             break
@@ -151,6 +163,8 @@ def play_sad_video():
 cap = cv2.VideoCapture(0)
 # Main video
 mainCap = cv2.VideoCapture(MAIN_VID)
+cv2.namedWindow("DeepFace Emotion Detection Over Video", cv2.WND_PROP_FULLSCREEN)
+cv2.setWindowProperty("DeepFace Emotion Detection Over Video", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
 while True:
     ret, frame = cap.read()
