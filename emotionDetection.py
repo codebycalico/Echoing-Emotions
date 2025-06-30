@@ -5,6 +5,11 @@ from deepface import DeepFace
 import cv2
 import time
 import mediapipe as mp
+import pyautogui
+
+# Move mouse to top left corner out of screen
+pyautogui.FAILSAFE = False
+pyautogui.moveTo(0, 0)
 
 # Initialize Mediapipe Hands
 mp_hands = mp.solutions.hands
