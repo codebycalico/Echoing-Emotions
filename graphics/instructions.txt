@@ -1,0 +1,10 @@
+INSTRUCTIONS FOR USE
+
+Ask the program to start detecting an emotion by standing in front of the screen and giving a thumbs up!
+The main video may pause for a moment to start the detection.
+
+Showcase an emotion to be detected. You can do HAPPY, SAD, or ANGRY.
+
+A corresponding clip will play of a horse expressing that emotion.
+
+To have it detect another emotion, you will have to do another thumbs up!
