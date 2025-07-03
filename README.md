@@ -1,4 +1,4 @@
-# Mirroring Emotions
+# Echoing Emotions
 A program created with OpenCV Python and DeepFace to detect user emotions and then run a specified video clip based on that emotion. When a face or emotion is not being detected, it will play the main video until it detects an emotion. The user will go in front of the video / webcam and do a thumbs up to activate the emotion detection sequence. After each emotion that it "mirrors" (plays a clip of a horse expressing that emotion), it will reset and they will need to do a thumbs up again for the program to begin to detect another emotion.
 
 ## Description to be posted next to exhibit
