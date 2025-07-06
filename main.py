@@ -40,7 +40,7 @@ startTime = None
 
 # How many seconds to detect the same emotion
 # before playing the video
-emotionThreshold = 1
+emotionThreshold = 1.5
 
 # This will be turned true if a thumb is detected, and
 # after an emotion video has played, it will go back to false
@@ -165,7 +165,9 @@ def play_sad_video():
 
 
 # Webcam
-cap = cv2.VideoCapture(0)
+# 0 will use the laptop's default built-in webcam
+# 1 will use an attached external webcam
+cap = cv2.VideoCapture(1)
 # Main video
 mainCap = cv2.VideoCapture(MAIN_VID)
 cv2.namedWindow("DeepFace Emotion Detection Over Video", cv2.WND_PROP_FULLSCREEN)
@@ -195,8 +197,8 @@ while True:
     if result.multi_hand_landmarks:
         for hand_landmarks in result.multi_hand_landmarks:
             if is_thumbs_up(hand_landmarks):
-                cv2.putText(mainFrame, 'Emotion detection started...', (50, 50), cv2.FONT_HERSHEY_SIMPLEX,
-                    1, (0, 255, 0), 2, cv2.LINE_AA )
+                #cv2.putText(mainFrame, 'Emotion detection started...', (50, 50), cv2.FONT_HERSHEY_SIMPLEX,
+                #    1, (0, 255, 0), 2, cv2.LINE_AA )
                 thumbActivation = True
 
     # print(thumbActivation) # for debugging
@@ -208,7 +210,7 @@ while True:
             analysis = DeepFace.analyze(frame, actions=['emotion'], enforce_detection=True, detector_backend='ssd')
             emotion = analysis[0]['dominant_emotion']
             
-            if emotion is not "neutral":
+            if emotion != "neutral":
                 # Check length of emotion expressed
                 if emotion != currEmotion:
                     currEmotion = emotion
