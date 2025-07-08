@@ -10,6 +10,7 @@ import pyautogui
 # Move mouse to top left corner out of screen
 pyautogui.FAILSAFE = False
 pyautogui.moveTo(0, 0)
+screen_width, screen_height = pyautogui.size()
 
 # Initialize Mediapipe Hands
 mp_hands = mp.solutions.hands
@@ -78,8 +79,10 @@ def play_happy_video():
     if happyTracker >= len(HAPPY_VIDEOS):
         happyTracker = 0
 
+    # load video, play fullscreen on the secondary monitor
     happy = cv2.VideoCapture(HAPPY_VIDEOS[happyTracker])
     cv2.namedWindow("Happy video", cv2.WND_PROP_FULLSCREEN)
+    cv2.moveWindow("Happy video", screen_width, 0)
     cv2.setWindowProperty("Happy video", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     if not happy.isOpened():
@@ -109,8 +112,10 @@ def play_angry_video():
     if angryTracker >= len(ANGRY_VIDEOS):
         angryTracker = 0
 
+    # load video, play fullscreen on the secondary monitor
     angry = cv2.VideoCapture(ANGRY_VIDEOS[angryTracker])
     cv2.namedWindow("Angry video", cv2.WND_PROP_FULLSCREEN)
+    cv2.moveWindow("Angry video", screen_width, 0)
     cv2.setWindowProperty("Angry video", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     if not angry.isOpened():
@@ -140,8 +145,10 @@ def play_sad_video():
     if sadTracker >= len(SAD_VIDEOS):
         sadTracker = 0
 
+    # load video, play fullscreen on the secondary monitor
     sad = cv2.VideoCapture(SAD_VIDEOS[sadTracker])
     cv2.namedWindow("Sad video", cv2.WND_PROP_FULLSCREEN)
+    cv2.moveWindow("Sad video", screen_width, 0)
     cv2.setWindowProperty("Sad video", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     if not sad.isOpened():
@@ -167,10 +174,12 @@ def play_sad_video():
 # Webcam
 # 0 will use the laptop's default built-in webcam
 # 1 will use an attached external webcam
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 # Main video
+# load video, play fullscreen on the secondary monitor
 mainCap = cv2.VideoCapture(MAIN_VID)
 cv2.namedWindow("DeepFace Emotion Detection Over Video", cv2.WND_PROP_FULLSCREEN)
+cv2.moveWindow("DeepFace Emotion Detection Over Video", screen_width, 0)
 cv2.setWindowProperty("DeepFace Emotion Detection Over Video", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
 while True:
@@ -200,6 +209,7 @@ while True:
                 #cv2.putText(mainFrame, 'Emotion detection started...', (50, 50), cv2.FONT_HERSHEY_SIMPLEX,
                 #    1, (0, 255, 0), 2, cv2.LINE_AA )
                 thumbActivation = True
+                currEmotion = None
 
     # print(thumbActivation) # for debugging
     if thumbActivation:
@@ -210,7 +220,7 @@ while True:
             analysis = DeepFace.analyze(frame, actions=['emotion'], enforce_detection=True, detector_backend='ssd')
             emotion = analysis[0]['dominant_emotion']
             
-            if emotion != "neutral":
+            if emotion is not "neutral":
                 # Check length of emotion expressed
                 if emotion != currEmotion:
                     currEmotion = emotion
