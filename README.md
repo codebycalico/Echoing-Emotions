@@ -8,7 +8,7 @@ Emotions able to be mirrored:
 - Angry
 - Sad
 
-## monitorEmotion.py
+## main.py
 Using DeepFace's lightweight facial recognition analysis library for Python and MediaPipe's body landmark library for Python.
 
 [DeepFace Library GitHub](https://github.com/serengil/deepface)
@@ -29,3 +29,6 @@ For the enforce_detection option, True will raise an error and stop processing w
 
 ## Videos
 Videos used in the exhibit are shot by me and not to be used without permission. They are not included in this GitHub.
+
+## Number of monitors
+If using one monitor only, you will need to uncomment the code at the top of main.py (comment is included in the code for clarity and easy of finding). This way, the mouse will be moved to the top left of the screen at the beginning of the program and be out of the way of the videos playing. If using two monitors, not necessary to move the mouse, so leave the moveTo function commented out.

@@ -7,9 +7,8 @@ import time
 import mediapipe as mp
 import pyautogui
 
-# Move mouse to top left corner out of screen
 pyautogui.FAILSAFE = False
-pyautogui.moveTo(0, 0)
+#pyautogui.moveTo(0, 0) # uncomment if using one monitor to move mouse to top left corner of screen
 screen_width, screen_height = pyautogui.size()
 
 # Initialize Mediapipe Hands
