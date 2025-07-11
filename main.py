@@ -6,6 +6,7 @@ import cv2
 import time
 import mediapipe as mp
 import pyautogui
+from screeninfo import get_monitors
 
 pyautogui.FAILSAFE = False
 #pyautogui.moveTo(0, 0) # uncomment if using one monitor to move mouse to top left corner of screen
@@ -182,6 +183,15 @@ cv2.moveWindow("DeepFace Emotion Detection Over Video", screen_width, 0)
 cv2.setWindowProperty("DeepFace Emotion Detection Over Video", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
 while True:
+    monitors = get_monitors()
+    num_monitors = len(monitors)
+
+    while num_monitors < 2:
+        monitors = get_monitors()
+        num_monitors = len(monitors)
+        print("Only one monitor detected.")
+        time.sleep(3)
+
     ret, frame = cap.read()
     mainRet, mainFrame = mainCap.read()
     if not ret:
