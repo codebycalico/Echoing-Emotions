@@ -1,7 +1,8 @@
-deepface
-opencv-python==4.5.5.64
-opencv-contrib-python==4.5.5.64
-time
+numpy
+tensorflow
+tf-keras
 mediapipe
+deepface
+opencv-python
 pyautogui
 screeninfo

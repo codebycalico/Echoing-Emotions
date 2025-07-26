@@ -1,4 +1,4 @@
-# Horses as Emotional Mirrors
+ # Horses as Emotional Mirrors
 # by Calico Rose Randall
 
 from deepface import DeepFace
@@ -172,8 +172,8 @@ def play_sad_video():
 
 
 # Webcam
-# 0 will use the laptop's default built-in webcam
-# 1 will use an attached external webcam
+# 0 will usually use the laptop's default built-in webcam
+# 1 will uusually se an attached external webcam
 cap = cv2.VideoCapture(0)
 # Main video
 # load video, play fullscreen on the secondary monitor
@@ -229,7 +229,7 @@ while True:
             analysis = DeepFace.analyze(frame, actions=['emotion'], enforce_detection=True, detector_backend='ssd')
             emotion = analysis[0]['dominant_emotion']
             
-            if emotion is not "neutral":
+            if emotion is not None:
                 # Check length of emotion expressed
                 if emotion != currEmotion:
                     currEmotion = emotion
